@@ -1,0 +1,303 @@
+:root {
+  --gray-0: rgba(252, 252, 252, 1);
+}
+$gray-0: rgba(252, 252, 252, 1);
+$gray-3: rgba(227, 227, 227, 1);
+$gray-4: rgba(156, 156, 156, 1);
+$gray-5: rgba(98, 98, 98, 1);
+$gray-6: rgba(20, 20, 20, 1);
+$blue-2: rgba(60, 152, 255, 1);
+
+body {
+  background-color: $gray-0;
+  overflow: hidden;
+}
+
+header {
+  position: relative;
+  z-index: 0;
+  position: fixed;
+  top: 0;
+  left: 0;
+  &::after {
+    position: absolute;
+    width: 100%;
+    height: 118px;
+    content: "";
+    background: linear-gradient(
+      to bottom,
+      rgba(252, 252, 252, 1) 0%,
+      transparent 100%
+    );
+    top: 0;
+    left: 0;
+    z-index: -1;
+  }
+}
+
+.chat {
+  max-width: 740px;
+  width: 100%;
+  margin: 0 auto;
+  padding-left: 20px;
+  padding-right: 20px;
+  color: $gray-6;
+  height: 100vh;
+  .question {
+    padding: 16px 20px;
+    border-radius: 20px;
+    background-color: rgba(169, 215, 255, 1);
+    margin-bottom: 40px;
+    width: fit-content;
+    margin-left: auto;
+  }
+  .answer {
+    padding-right: 106px;
+    &_logo {
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      img {
+        width: 60px;
+      }
+      p {
+        color: $gray-5;
+        font-size: 17px;
+      }
+    }
+    &_text {
+      border: 1px solid $gray-3;
+      border-radius: 20px;
+      background-color: #fff;
+      padding: 16px 20px;
+    }
+    &_pic {
+      padding: 0 20px;
+      margin-top: 30px;
+      max-width: 460px;
+      width: 100%;
+      img {
+        width: 100%;
+      }
+    }
+  }
+  &_inner {
+    padding-bottom: 40px;
+    height: calc(100% - 143px);
+    overflow-y: auto;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 92px;
+  }
+  &_wrapper {
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+    &.init {
+      .init-wrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 30px;
+        max-width: 552px;
+        width: 100%;
+        margin: 0 auto;
+        height: 100%;
+        padding-top: 34px;
+      }
+      img {
+        width: 140px;
+      }
+      h1 {
+        font-size: 26px;
+        font-weight: 500;
+        margin: 0;
+      }
+      p {
+        margin: 0;
+        font-size: 14px;
+        line-height: 2;
+        .remind {
+          color: $blue-2;
+        }
+      }
+    }
+    &.chatting {
+      display: none;
+      justify-content: flex-end;
+    }
+  }
+  &_bottom {
+    padding-bottom: 36px;
+    &_inner {
+      max-width: 700px;
+      width: 100%;
+      margin: 0 auto;
+    }
+    .remark {
+      font-size: 13px;
+      margin: 0;
+      color: $gray-5;
+      text-align: center;
+      height: 20px;
+    }
+  }
+  &_input {
+    padding: 12px 20px;
+    border-radius: 20px;
+    border: 1.5px solid $gray-3;
+    margin-bottom: 14px;
+    background-color: #fff;
+    display: flex;
+    align-items: center;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.06);
+    textarea {
+      width: calc(100% - 46px);
+      padding-right: 16px;
+      font-size: 18px;
+      height: 46px;
+      padding: 10px 16px 10px 0;
+      box-sizing: border-box;
+      overflow: hidden;
+      &::placeholder {
+        color: $gray-4;
+      }
+    }
+    &_send {
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      background-color: $blue-2;
+      padding: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      > img {
+        width: 54%;
+      }
+    }
+  }
+  @media screen and (max-width: 1024px) {
+    max-width: 680px;
+    .question {
+      padding: 14px 16px;
+      border-radius: 20px;
+      margin-bottom: 30px;
+    }
+    .answer {
+      padding-right: 94px;
+      &_logo {
+        margin-bottom: 10px;
+        img {
+          width: 54px;
+        }
+        p {
+          font-size: 16px;
+        }
+      }
+      &_text {
+        padding: 14px 16px;
+      }
+      &_pic {
+        padding: 0 16px;
+        margin-top: 24px;
+        max-width: 400px;
+      }
+    }
+    &_inner {
+      padding-bottom: 30px;
+      height: calc(100% - 126px);
+      padding-left: 8px;
+      padding-right: 8px;
+    }
+    &_bottom {
+      padding-bottom: 32px;
+      &_inner {
+        max-width: 640px;
+      }
+      .remark {
+        font-size: 12px;
+        height: 19px;
+      }
+    }
+    &_input {
+      padding: 10px 16px;
+      margin-bottom: 12px;
+      textarea {
+        width: calc(100% - 40px);
+        font-size: 15px;
+        height: 40px;
+      }
+      &_send {
+        width: 40px;
+        height: 40px;
+      }
+    }
+
+    &_wrapper {
+      &.init {
+        justify-content: center;
+        .init-wrapper {
+          gap: 25px;
+          max-width: 518px;
+          padding-top: 0;
+          margin-top: -40px;
+        }
+        img {
+          width: 130px;
+          margin-bottom: 3px;
+        }
+        h1 {
+          font-size: 24px;
+        }
+        p {
+          font-size: 13px;
+        }
+      }
+    }
+  }
+  @media screen and (max-width: 450px) {
+    padding-left: 5px;
+    padding-right: 5px;
+    .question {
+      font-size: 15px;
+    }
+    .answer {
+      padding-right: 0;
+      font-size: 15px;
+      &_text {
+        width: calc(100% - 32px);
+      }
+      &_pic {
+        margin-top: 22px;
+        max-width: inherit;
+      }
+    }
+    &_inner {
+      height: calc(100% - 115px);
+      padding-left: 6px;
+      padding-right: 6px;
+    }
+    &_bottom {
+      padding-bottom: 24px;
+    }
+    &_wrapper {
+      &.init {
+        padding-left: 6px;
+        padding-right: 6px;
+        .init-wrapper {
+          gap: 22px;
+          margin: 0;
+        }
+        img {
+          width: 120px;
+          margin-bottom: 4px;
+        }
+        h1 {
+          font-size: 22px;
+        }
+      }
+    }
+  }
+}
