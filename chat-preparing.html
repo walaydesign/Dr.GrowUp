@@ -113,24 +113,7 @@
               <div
                 class="hidden items-center space-x-8 pr-[68px] md:flex lg:mt-1"
               >
-                <div class="hidden h-[44px] md:block"></div>
-                <div
-                  class="transition-opacity duration-300 opacity-100 flex space-x-8"
-                >
-                  <a
-                    class="font-noto text-[14px] leading-[180%] font-medium tracking-[0.16em] transition-opacity hover:opacity-80 text-white"
-                    href="/blog"
-                    >長高秘訣</a
-                  ><a
-                    class="font-noto text-[14px] leading-[180%] font-medium tracking-[0.16em] transition-opacity hover:opacity-80 text-white"
-                    href="/blog/about-doctor"
-                    >醫師介紹</a
-                  ><a
-                    class="font-noto text-[14px] leading-[180%] font-medium tracking-[0.16em] transition-opacity hover:opacity-80 text-white"
-                    href="/blog/service"
-                    >服務內容</a
-                  >
-                </div>
+                <a href="/blog/booking"><button class="font-noto inline-block h-[40px] w-[114px] transform cursor-pointer rounded-[46px] bg-[#FFCB2E] text-[13px] leading-[160%] font-semibold tracking-[0.16em] whitespace-nowrap text-black transition-all hover:scale-110 hover:bg-[#FFDA2B] lg:h-[44px] lg:w-[120px] lg:text-[14px]" aria-label="立即預約" style="opacity: 1; transform: none;">立即預約</button></a>
               </div>
               <div
                 class="fixed top-[14px] right-6 z-10 md:top-[18px] lg:top-[25px]"
@@ -367,7 +350,7 @@
       <main class="flex-grow">
         <div class="chat">
           <div class="chat_inner">
-            <div class="chat_wrapper init">
+            <!-- <div class="chat_wrapper init">
               <div class="init-wrapper">
                 <img src="./_next/logo.png" alt="" />
                 <h1>你好！我是剛剛好醫師</h1>
@@ -381,8 +364,8 @@
                   >
                 </p>
               </div>
-            </div>
-            <div class="chat_wrapper chatting">
+            </div> -->
+            <div class="chat_wrapper chatting" style="display: flex;">
               <p class="question">骨齡是什麼？</p>
               <div class="answer">
                 <div class="answer_logo">
@@ -390,15 +373,11 @@
                   <p>剛剛好 AI</p>
                 </div>
                 <div class="answer_text">
-                  骨齡其實就是看「孩子的生理成熟度」，而不是單純看實際年齡。<br />
-                  <br />
-                  我們會透過手部 X
-                  光，觀察骨頭生長板的狀態，來判斷孩子目前的發育進度。因為有些孩子雖然
-                  10 歲，但骨齡可能像 8 歲；也有些孩子骨齡已經跑到 12
-                  歲，代表生理時鐘走得比較快。
-                </div>
-                <div class="answer_pic">
-                  <img src="./_next/pic.png" alt="" />
+                  <div class="typing">
+                    <div class="dot dot-1"></div>
+                    <div class="dot dot-2"></div>
+                    <div class="dot dot-3"></div>
+                  </div>
                 </div>
               </div>
             </div>

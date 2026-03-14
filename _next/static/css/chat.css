@@ -77,6 +77,9 @@ header::after {
   border-radius: 20px;
   background-color: #fff;
   padding: 16px 20px;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
 }
 
 .chat .answer_pic {
@@ -199,6 +202,7 @@ header::after {
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
   overflow: hidden;
+  resize: none;
 }
 
 .chat_input textarea::-webkit-input-placeholder {
@@ -332,7 +336,7 @@ header::after {
     font-size: 15px;
   }
   .chat .answer_text {
-    width: calc(100% - 32px);
+    max-width: calc(100% - 32px);
   }
   .chat .answer_pic {
     margin-top: 22px;
@@ -360,6 +364,139 @@ header::after {
   }
   .chat_wrapper.init h1 {
     font-size: 22px;
+  }
+}
+
+.typing {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  padding: 10px 0;
+  gap: 16px;
+}
+
+.typing .dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: #3c98ff;
+  opacity: 0.2;
+  -webkit-transition: none;
+  transition: none;
+}
+
+.typing .dot-1 {
+  -webkit-animation: typing-1 1.5s linear infinite forwards;
+          animation: typing-1 1.5s linear infinite forwards;
+}
+
+.typing .dot-2 {
+  -webkit-animation: typing-2 1.5s linear infinite forwards;
+          animation: typing-2 1.5s linear infinite forwards;
+}
+
+.typing .dot-3 {
+  -webkit-animation: typing-3 1.5s linear infinite forwards;
+          animation: typing-3 1.5s linear infinite forwards;
+}
+
+@media screen and (max-width: 1024px) {
+  .typing {
+    gap: 14px;
+  }
+  .typing .dot {
+    width: 8px;
+    height: 8px;
+  }
+}
+
+@-webkit-keyframes typing-1 {
+  0% {
+    opacity: 0.2;
+  }
+  33% {
+    opacity: 1;
+  }
+  67% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes typing-1 {
+  0% {
+    opacity: 0.2;
+  }
+  33% {
+    opacity: 1;
+  }
+  67% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@-webkit-keyframes typing-2 {
+  0% {
+    opacity: 0.2;
+  }
+  33% {
+    opacity: 0.2;
+  }
+  67% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes typing-2 {
+  0% {
+    opacity: 0.2;
+  }
+  33% {
+    opacity: 0.2;
+  }
+  67% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@-webkit-keyframes typing-3 {
+  0% {
+    opacity: 0.2;
+  }
+  33% {
+    opacity: 0.2;
+  }
+  67% {
+    opacity: 0.2;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes typing-3 {
+  0% {
+    opacity: 0.2;
+  }
+  33% {
+    opacity: 0.2;
+  }
+  67% {
+    opacity: 0.2;
+  }
+  100% {
+    opacity: 1;
   }
 }
 /*# sourceMappingURL=chat.css.map */

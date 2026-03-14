@@ -71,6 +71,7 @@ header {
       border-radius: 20px;
       background-color: #fff;
       padding: 16px 20px;
+      width: fit-content;
     }
     &_pic {
       padding: 0 20px;
@@ -160,6 +161,7 @@ header {
       padding: 10px 16px 10px 0;
       box-sizing: border-box;
       overflow: hidden;
+      resize: none;
       &::placeholder {
         color: $gray-4;
       }
@@ -267,7 +269,7 @@ header {
       padding-right: 0;
       font-size: 15px;
       &_text {
-        width: calc(100% - 32px);
+        max-width: calc(100% - 32px);
       }
       &_pic {
         margin-top: 22px;
@@ -299,5 +301,80 @@ header {
         }
       }
     }
+  }
+}
+
+.typing {
+  display: flex;
+  padding: 10px 0;
+  gap: 16px;
+  .dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: $blue-2;
+    opacity: 0.2;
+    transition: none;
+    &-1 {
+      animation: typing-1 1.5s linear infinite forwards;
+    }
+    &-2 {
+      animation: typing-2 1.5s linear infinite forwards;
+    }
+    &-3 {
+      animation: typing-3 1.5s linear infinite forwards;
+    }
+  }
+  @media screen and (max-width: 1024px) {
+    gap: 14px;
+    .dot {
+        width: 8px;
+        height: 8px;
+    }
+  }
+}
+
+@keyframes typing-1 {
+  0% {
+    opacity: 0.2;
+  }
+  33% {
+    opacity: 1;
+  }
+  67% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes typing-2 {
+  0% {
+    opacity: 0.2;
+  }
+  33% {
+    opacity: 0.2;
+  }
+  67% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes typing-3 {
+  0% {
+    opacity: 0.2;
+  }
+  33% {
+    opacity: 0.2;
+  }
+  67% {
+    opacity: 0.2;
+  }
+  100% {
+    opacity: 1;
   }
 }
