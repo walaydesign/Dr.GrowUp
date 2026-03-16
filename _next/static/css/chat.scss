@@ -36,13 +36,11 @@ header {
 }
 
 .chat {
-  max-width: 740px;
-  width: 100%;
-  margin: 0 auto;
   padding-left: 20px;
   padding-right: 20px;
   color: $gray-6;
   height: 100vh;
+  overflow-y: auto;
   .question {
     padding: 16px 20px;
     border-radius: 20px;
@@ -50,9 +48,28 @@ header {
     margin-bottom: 40px;
     width: fit-content;
     margin-left: auto;
+    opacity: 0;
+    transition: 0.3s;
+    visibility: hidden;
+    transform: translateX(100px);
+    &.show {
+      opacity: 1;
+      visibility: visible;
+      transform: none;
+    }
   }
   .answer {
     padding-right: 106px;
+    margin-bottom: 40px;
+    opacity: 0;
+    transition: 0.3s;
+    visibility: hidden;
+    transform: translateX(-100px);
+    &.show {
+      opacity: 1;
+      visibility: visible;
+      transform: none;
+    }
     &_logo {
       margin-bottom: 12px;
       display: flex;
@@ -72,40 +89,49 @@ header {
       background-color: #fff;
       padding: 16px 20px;
       width: fit-content;
+      min-height: 60px;
+      display: flex;
+      // align-items: center;
+      justify-content: center;
+      flex-direction: column;
     }
     &_pic {
       padding: 0 20px;
       margin-top: 30px;
       max-width: 460px;
       width: 100%;
+      margin-top: 30px;
       img {
         width: 100%;
       }
     }
   }
   &_inner {
-    padding-bottom: 40px;
-    height: calc(100% - 143px);
-    overflow-y: auto;
     padding-left: 10px;
     padding-right: 10px;
     padding-top: 92px;
+    max-width: 740px;
+    width: 100%;
+    margin: 0 auto;
+    height: 100%;
   }
   &_wrapper {
-    display: flex;
+    display: none;
     flex-direction: column;
     min-height: 100%;
+    padding-bottom: 143px;
     &.init {
+      justify-content: center;
       .init-wrapper {
         display: flex;
         flex-direction: column;
         align-items: center;
         gap: 30px;
-        max-width: 552px;
+        max-width: 550px;
         width: 100%;
         margin: 0 auto;
         height: 100%;
-        padding-top: 34px;
+        transform: translateY(-10%);
       }
       img {
         width: 140px;
@@ -125,16 +151,25 @@ header {
       }
     }
     &.chatting {
-      display: none;
       justify-content: flex-end;
+    }
+    &.active {
+      display: flex;
     }
   }
   &_bottom {
-    padding-bottom: 36px;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+    left: 0;
     &_inner {
-      max-width: 700px;
+      max-width: 760px;
       width: 100%;
       margin: 0 auto;
+      background-color: $gray-0;
+      padding-bottom: 36px;
+      padding-left: 5px;
+      padding-right: 5px;
     }
     .remark {
       font-size: 13px;
@@ -181,7 +216,6 @@ header {
     }
   }
   @media screen and (max-width: 1024px) {
-    max-width: 680px;
     .question {
       padding: 14px 16px;
       border-radius: 20px;
@@ -189,6 +223,7 @@ header {
     }
     .answer {
       padding-right: 94px;
+      margin-bottom: 30px;
       &_logo {
         margin-bottom: 10px;
         img {
@@ -208,15 +243,16 @@ header {
       }
     }
     &_inner {
-      padding-bottom: 30px;
-      height: calc(100% - 126px);
+      // padding-bottom: 30px;
+      // height: calc(100% - 126px);
       padding-left: 8px;
       padding-right: 8px;
+      max-width: 680px;
     }
     &_bottom {
-      padding-bottom: 32px;
       &_inner {
-        max-width: 640px;
+        max-width: 690px;
+        padding-bottom: 32px;
       }
       .remark {
         font-size: 12px;
@@ -238,6 +274,7 @@ header {
     }
 
     &_wrapper {
+      padding-bottom: 126px;
       &.init {
         justify-content: center;
         .init-wrapper {
@@ -256,6 +293,8 @@ header {
         p {
           font-size: 13px;
         }
+      }
+      &.chatting {
       }
     }
   }
@@ -277,14 +316,16 @@ header {
       }
     }
     &_inner {
-      height: calc(100% - 115px);
       padding-left: 6px;
       padding-right: 6px;
     }
     &_bottom {
-      padding-bottom: 24px;
+      &_inner {
+        padding-bottom: 24px;
+      }
     }
     &_wrapper {
+      padding-bottom: 118px;
       &.init {
         padding-left: 6px;
         padding-right: 6px;
@@ -300,13 +341,15 @@ header {
           font-size: 22px;
         }
       }
+      &.chatting {
+      }
     }
   }
 }
 
 .typing {
   display: flex;
-  padding: 10px 0;
+  // padding: 10px 0;
   gap: 16px;
   .dot {
     width: 10px;
@@ -316,20 +359,20 @@ header {
     opacity: 0.2;
     transition: none;
     &-1 {
-      animation: typing-1 1.5s linear infinite forwards;
+      animation: typing-1 2s linear infinite forwards;
     }
     &-2 {
-      animation: typing-2 1.5s linear infinite forwards;
+      animation: typing-2 2s linear infinite forwards;
     }
     &-3 {
-      animation: typing-3 1.5s linear infinite forwards;
+      animation: typing-3 2s linear infinite forwards;
     }
   }
   @media screen and (max-width: 1024px) {
     gap: 14px;
     .dot {
-        width: 8px;
-        height: 8px;
+      width: 8px;
+      height: 8px;
     }
   }
 }
@@ -338,14 +381,23 @@ header {
   0% {
     opacity: 0.2;
   }
+  16% {
+    opacity: 0.2;
+  }
   33% {
     opacity: 1;
   }
+  50% {
+    opacity: 0.2;
+  }
   67% {
-    opacity: 1;
+    opacity: 0.2;
+  }
+  84% {
+    opacity: 0.2;
   }
   100% {
-    opacity: 1;
+    opacity: 0.2;
   }
 }
 
@@ -353,14 +405,23 @@ header {
   0% {
     opacity: 0.2;
   }
+  16% {
+    opacity: 0.2;
+  }
   33% {
+    opacity: 0.2;
+  }
+  50% {
     opacity: 0.2;
   }
   67% {
     opacity: 1;
   }
+  84% {
+    opacity: 0.2;
+  }
   100% {
-    opacity: 1;
+    opacity: 0.2;
   }
 }
 
@@ -368,10 +429,19 @@ header {
   0% {
     opacity: 0.2;
   }
+  16% {
+    opacity: 0.2;
+  }
   33% {
     opacity: 0.2;
   }
+  50% {
+    opacity: 0.2;
+  }
   67% {
+    opacity: 0.2;
+  }
+  84% {
     opacity: 0.2;
   }
   100% {

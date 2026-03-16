@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link
+    <!-- <link
       rel="preload"
       href="./_next/static/media/0484562807a97172-s.p.woff2"
     />
@@ -14,22 +14,22 @@
     <link
       rel="preload"
       href="./_next/static/media/8888a3826f4a3af4-s.p.woff2"
-    />
-    <link
+    /> -->
+    <!-- <link
       rel="preload"
       href="./_next/static/media/eafabf029ad39a43-s.p.woff2"
-    />
+    /> -->
     <link rel="stylesheet" href="./_next/static/css/font-2.css" />
     <link rel="stylesheet" href="./_next/static/css/font.css" />
     <link rel="stylesheet" href="./_next/static/css/tailwind.css" />
     <link rel="stylesheet" href="./_next/static/css/chat.css" />
-    <link
+    <!-- <link
       rel="preload"
       as="script"
       fetchpriority="low"
       href="/_next/static/chunks/webpack-1a727c12ec7e82d6.js?dpl=dpl_7DiiZLzhTJC89QMjUaddZKTzo7wg"
-    />
-    <script
+    /> -->
+    <!-- <script
       src="/_next/static/chunks/4bd1b696-e01c39b7772536cd.js?dpl=dpl_7DiiZLzhTJC89QMjUaddZKTzo7wg"
       async=""
     ></script>
@@ -76,16 +76,20 @@
     <script
       src="/_next/static/chunks/577-6c6cecb5098ce117.js?dpl=dpl_7DiiZLzhTJC89QMjUaddZKTzo7wg"
       async=""
-    ></script>
+    ></script> -->
     <script
-      src="/_next/static/chunks/app/page-8b403749774ffc1e.js?dpl=dpl_7DiiZLzhTJC89QMjUaddZKTzo7wg"
-      async=""
+      src="https://code.jquery.com/jquery-4.0.0.js"
+      integrity="sha256-9fsHeVnKBvqh3FB2HYu7g2xseAZ5MlN6Kz/qnkASV8U="
+      crossorigin="anonymous"
     ></script>
+    <script src="./_next/static/chunks/gsap/gsap.min.js"></script>
+    <script src="./_next/static/chunks/gsap/SplitText.min.js"></script>
+    <script src="./_next/static/chunks/chat.js"></script>
     <title>Dr.GrowUp</title>
-    <script
+    <!-- <script
       src="/_next/static/chunks/polyfills-42372ed130431b0a.js?dpl=dpl_7DiiZLzhTJC89QMjUaddZKTzo7wg"
       nomodule=""
-    ></script>
+    ></script> -->
   </head>
   <body>
     <div class="flex min-h-screen flex-col">
@@ -113,7 +117,15 @@
               <div
                 class="hidden items-center space-x-8 pr-[68px] md:flex lg:mt-1"
               >
-                <a href="/blog/booking"><button class="font-noto inline-block h-[40px] w-[114px] transform cursor-pointer rounded-[46px] bg-[#FFCB2E] text-[13px] leading-[160%] font-semibold tracking-[0.16em] whitespace-nowrap text-black transition-all hover:scale-110 hover:bg-[#FFDA2B] lg:h-[44px] lg:w-[120px] lg:text-[14px]" aria-label="立即預約" style="opacity: 1; transform: none;">立即預約</button></a>
+                <a href="/blog/booking"
+                  ><button
+                    class="font-noto inline-block h-[40px] w-[114px] transform cursor-pointer rounded-[46px] bg-[#FFCB2E] text-[13px] leading-[160%] font-semibold tracking-[0.16em] whitespace-nowrap text-black transition-all hover:scale-110 hover:bg-[#FFDA2B] lg:h-[44px] lg:w-[120px] lg:text-[14px]"
+                    aria-label="立即預約"
+                    style="opacity: 1; transform: none"
+                  >
+                    立即預約
+                  </button></a
+                >
               </div>
               <div
                 class="fixed top-[14px] right-6 z-10 md:top-[18px] lg:top-[25px]"
@@ -350,11 +362,11 @@
       <main class="flex-grow">
         <div class="chat">
           <div class="chat_inner">
-            <div class="chat_wrapper init">
+            <div class="chat_wrapper init active">
               <div class="init-wrapper">
                 <img src="./_next/logo.png" alt="" />
                 <h1>你好！我是剛剛好醫師</h1>
-                <p>
+                <p class="init-text">
                   嗨，我是兒童內分泌科「剛剛好醫師」黃世綱。專門協助孩子身高、體重與發育「不剛好」的狀況。關於長高、性早熟、骨齡判讀與用藥規劃，都是我長期專注的領域。
                   <br />
                   <br />
@@ -366,8 +378,8 @@
               </div>
             </div>
             <div class="chat_wrapper chatting">
-              <p class="question">骨齡是什麼？</p>
-              <div class="answer">
+              <!-- <p class="question">骨齡是什麼？</p> -->
+              <!-- <div class="answer">
                 <div class="answer_logo">
                   <img src="./_next/logo.png" alt="" />
                   <p>剛剛好 AI</p>
@@ -383,7 +395,7 @@
                 <div class="answer_pic">
                   <img src="./_next/pic.png" alt="" />
                 </div>
-              </div>
+              </div> -->
             </div>
           </div>
           <div class="chat_bottom">
@@ -392,9 +404,10 @@
                 <textarea
                   name=""
                   id=""
+                  class="chat-input-main"
                   placeholder="歡迎詢問成長相關的問題"
                 ></textarea>
-                <button class="chat_input_send">
+                <button type="button" class="chat_input_send">
                   <img src="./_next/send.svg" alt="" />
                 </button>
               </div>

@@ -28,13 +28,11 @@ header::after {
 }
 
 .chat {
-  max-width: 740px;
-  width: 100%;
-  margin: 0 auto;
   padding-left: 20px;
   padding-right: 20px;
   color: #141414;
   height: 100vh;
+  overflow-y: auto;
 }
 
 .chat .question {
@@ -46,10 +44,37 @@ header::after {
   width: -moz-fit-content;
   width: fit-content;
   margin-left: auto;
+  opacity: 0;
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+  visibility: hidden;
+  -webkit-transform: translateX(100px);
+          transform: translateX(100px);
+}
+
+.chat .question.show {
+  opacity: 1;
+  visibility: visible;
+  -webkit-transform: none;
+          transform: none;
 }
 
 .chat .answer {
   padding-right: 106px;
+  margin-bottom: 40px;
+  opacity: 0;
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+  visibility: hidden;
+  -webkit-transform: translateX(-100px);
+          transform: translateX(-100px);
+}
+
+.chat .answer.show {
+  opacity: 1;
+  visibility: visible;
+  -webkit-transform: none;
+          transform: none;
 }
 
 .chat .answer_logo {
@@ -80,6 +105,17 @@ header::after {
   width: -webkit-fit-content;
   width: -moz-fit-content;
   width: fit-content;
+  min-height: 60px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
 }
 
 .chat .answer_pic {
@@ -87,6 +123,7 @@ header::after {
   margin-top: 30px;
   max-width: 460px;
   width: 100%;
+  margin-top: 30px;
 }
 
 .chat .answer_pic img {
@@ -94,23 +131,29 @@ header::after {
 }
 
 .chat_inner {
-  padding-bottom: 40px;
-  height: calc(100% - 143px);
-  overflow-y: auto;
   padding-left: 10px;
   padding-right: 10px;
   padding-top: 92px;
+  max-width: 740px;
+  width: 100%;
+  margin: 0 auto;
+  height: 100%;
 }
 
 .chat_wrapper {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
+  display: none;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
   min-height: 100%;
+  padding-bottom: 143px;
+}
+
+.chat_wrapper.init {
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
 }
 
 .chat_wrapper.init .init-wrapper {
@@ -125,11 +168,12 @@ header::after {
       -ms-flex-align: center;
           align-items: center;
   gap: 30px;
-  max-width: 552px;
+  max-width: 550px;
   width: 100%;
   margin: 0 auto;
   height: 100%;
-  padding-top: 34px;
+  -webkit-transform: translateY(-10%);
+          transform: translateY(-10%);
 }
 
 .chat_wrapper.init img {
@@ -153,20 +197,32 @@ header::after {
 }
 
 .chat_wrapper.chatting {
-  display: none;
   -webkit-box-pack: end;
       -ms-flex-pack: end;
           justify-content: flex-end;
 }
 
+.chat_wrapper.active {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
 .chat_bottom {
-  padding-bottom: 36px;
+  position: fixed;
+  width: 100%;
+  bottom: 0;
+  left: 0;
 }
 
 .chat_bottom_inner {
-  max-width: 700px;
+  max-width: 760px;
   width: 100%;
   margin: 0 auto;
+  background-color: #fcfcfc;
+  padding-bottom: 36px;
+  padding-left: 5px;
+  padding-right: 5px;
 }
 
 .chat_bottom .remark {
@@ -243,9 +299,6 @@ header::after {
 }
 
 @media screen and (max-width: 1024px) {
-  .chat {
-    max-width: 680px;
-  }
   .chat .question {
     padding: 14px 16px;
     border-radius: 20px;
@@ -253,6 +306,7 @@ header::after {
   }
   .chat .answer {
     padding-right: 94px;
+    margin-bottom: 30px;
   }
   .chat .answer_logo {
     margin-bottom: 10px;
@@ -272,16 +326,13 @@ header::after {
     max-width: 400px;
   }
   .chat_inner {
-    padding-bottom: 30px;
-    height: calc(100% - 126px);
     padding-left: 8px;
     padding-right: 8px;
-  }
-  .chat_bottom {
-    padding-bottom: 32px;
+    max-width: 680px;
   }
   .chat_bottom_inner {
-    max-width: 640px;
+    max-width: 690px;
+    padding-bottom: 32px;
   }
   .chat_bottom .remark {
     font-size: 12px;
@@ -299,6 +350,9 @@ header::after {
   .chat_input_send {
     width: 40px;
     height: 40px;
+  }
+  .chat_wrapper {
+    padding-bottom: 126px;
   }
   .chat_wrapper.init {
     -webkit-box-pack: center;
@@ -343,12 +397,14 @@ header::after {
     max-width: inherit;
   }
   .chat_inner {
-    height: calc(100% - 115px);
     padding-left: 6px;
     padding-right: 6px;
   }
-  .chat_bottom {
+  .chat_bottom_inner {
     padding-bottom: 24px;
+  }
+  .chat_wrapper {
+    padding-bottom: 118px;
   }
   .chat_wrapper.init {
     padding-left: 6px;
@@ -371,7 +427,6 @@ header::after {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  padding: 10px 0;
   gap: 16px;
 }
 
@@ -386,18 +441,18 @@ header::after {
 }
 
 .typing .dot-1 {
-  -webkit-animation: typing-1 1.5s linear infinite forwards;
-          animation: typing-1 1.5s linear infinite forwards;
+  -webkit-animation: typing-1 2s linear infinite forwards;
+          animation: typing-1 2s linear infinite forwards;
 }
 
 .typing .dot-2 {
-  -webkit-animation: typing-2 1.5s linear infinite forwards;
-          animation: typing-2 1.5s linear infinite forwards;
+  -webkit-animation: typing-2 2s linear infinite forwards;
+          animation: typing-2 2s linear infinite forwards;
 }
 
 .typing .dot-3 {
-  -webkit-animation: typing-3 1.5s linear infinite forwards;
-          animation: typing-3 1.5s linear infinite forwards;
+  -webkit-animation: typing-3 2s linear infinite forwards;
+          animation: typing-3 2s linear infinite forwards;
 }
 
 @media screen and (max-width: 1024px) {
@@ -414,14 +469,23 @@ header::after {
   0% {
     opacity: 0.2;
   }
+  16% {
+    opacity: 0.2;
+  }
   33% {
     opacity: 1;
   }
+  50% {
+    opacity: 0.2;
+  }
   67% {
-    opacity: 1;
+    opacity: 0.2;
+  }
+  84% {
+    opacity: 0.2;
   }
   100% {
-    opacity: 1;
+    opacity: 0.2;
   }
 }
 
@@ -429,14 +493,23 @@ header::after {
   0% {
     opacity: 0.2;
   }
+  16% {
+    opacity: 0.2;
+  }
   33% {
     opacity: 1;
   }
+  50% {
+    opacity: 0.2;
+  }
   67% {
-    opacity: 1;
+    opacity: 0.2;
+  }
+  84% {
+    opacity: 0.2;
   }
   100% {
-    opacity: 1;
+    opacity: 0.2;
   }
 }
 
@@ -444,14 +517,23 @@ header::after {
   0% {
     opacity: 0.2;
   }
+  16% {
+    opacity: 0.2;
+  }
   33% {
+    opacity: 0.2;
+  }
+  50% {
     opacity: 0.2;
   }
   67% {
     opacity: 1;
   }
+  84% {
+    opacity: 0.2;
+  }
   100% {
-    opacity: 1;
+    opacity: 0.2;
   }
 }
 
@@ -459,14 +541,23 @@ header::after {
   0% {
     opacity: 0.2;
   }
+  16% {
+    opacity: 0.2;
+  }
   33% {
+    opacity: 0.2;
+  }
+  50% {
     opacity: 0.2;
   }
   67% {
     opacity: 1;
   }
+  84% {
+    opacity: 0.2;
+  }
   100% {
-    opacity: 1;
+    opacity: 0.2;
   }
 }
 
@@ -474,10 +565,19 @@ header::after {
   0% {
     opacity: 0.2;
   }
+  16% {
+    opacity: 0.2;
+  }
   33% {
     opacity: 0.2;
   }
+  50% {
+    opacity: 0.2;
+  }
   67% {
+    opacity: 0.2;
+  }
+  84% {
     opacity: 0.2;
   }
   100% {
@@ -489,10 +589,19 @@ header::after {
   0% {
     opacity: 0.2;
   }
+  16% {
+    opacity: 0.2;
+  }
   33% {
     opacity: 0.2;
   }
+  50% {
+    opacity: 0.2;
+  }
   67% {
+    opacity: 0.2;
+  }
+  84% {
     opacity: 0.2;
   }
   100% {
