@@ -402,12 +402,15 @@
           <div class="chat_bottom">
             <div class="chat_bottom_inner">
               <div class="chat_input">
-                <textarea
-                  name=""
-                  id=""
-                  class="chat-input-main"
-                  placeholder="歡迎詢問成長相關的問題"
-                ></textarea>
+                <div class="chat_input_wrapper">
+                  <textarea
+                    name=""
+                    id=""
+                    class="chat-input-main"
+                    placeholder="歡迎詢問成長相關的問題"
+                    rows="1"
+                  ></textarea>
+                </div>
                 <button type="button" class="chat_input_send">
                   <img src="./next/send.svg" alt="" />
                 </button>
@@ -419,6 +422,45 @@
       </main>
     </div>
 
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const textarea = document.querySelector(".chat-input-main");
+
+        if (textarea) {
+          // 記住「第一行」的原始高度
+          const baseHeight = textarea.offsetHeight;
+          const maxHeight = parseInt(
+            window.getComputedStyle(textarea).maxHeight,
+          );
+
+          textarea.addEventListener("input", function () {
+            // 1. 重置，讓 scrollHeight 反映真實內容高度
+            this.style.height = "auto";
+            // 2. 獲取當前內容高度
+            let currentScrollHeight = this.scrollHeight;
+
+            // 3. 邏輯判斷
+            if (currentScrollHeight <= baseHeight) {
+              // console.log("如果內容高度小於或等於初始高度 -> 回到第一行狀態");
+              this.style.height = baseHeight + "px";
+              this.classList.remove("scrollable");
+            } else if (
+              currentScrollHeight > baseHeight &&
+              currentScrollHeight <= maxHeight
+            ) {
+              // console.log("介於 2~4 行之間 -> 隨內容增高");
+
+              this.style.height = currentScrollHeight + "px";
+              this.classList.remove("scrollable");
+            } else {
+              // console.log("超過 4 行 -> 固定在最大值");
+              this.style.height = maxHeight + "px";
+              this.classList.add("scrollable");
+            }
+          });
+        }
+      });
+    </script>
     <!-- <script src="./next/static/chunks/webpack-1a727c12ec7e82d6.js"></script> -->
   </body>
 </html>

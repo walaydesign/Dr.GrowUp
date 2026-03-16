@@ -44,17 +44,16 @@ $(document).ready(function () {
         question.addClass("show");
       }, 100);
       $(".chat-input-main").val("");
+      let chatHeight = $(".chat_wrapper.chatting").height();
+      $(".chat").animate({ scrollTop: chatHeight }, 300);
 
       //   思考回答出現的動畫
       setTimeout(() => {
         answer.addClass("show");
+        //   回答
         setTimeout(() => {
-          //   回答
           let answerText = `如果你對孩子的身高、骨齡或發育還想更系統地了解，其實黃醫師有把很多門診常被問到的問題整理成一本書。<br><br>裡面把身高、骨齡、發育指標等觀念講得很清楚，也整理了很多爸媽常見的疑問。<br><br>有興趣可以看看：<a href="#">https://www.drgrowup.com.tw/blog/shop</a><br>我可以怎麼瞭解更多資訊`;
-          // let answerTextWrap = $("<p class='answer_text'></p>").html(
-          //   answerText,
-          // );
-            let answerTextWrap = $("<p class='answer_text'></p>");
+          let answerTextWrap = $("<p class='answer_text'></p>");
 
           let answerImgUrl = "./next/pic.jpg";
           let answerImg = $("<img>").attr("src", answerImgUrl);
@@ -66,11 +65,7 @@ $(document).ready(function () {
 
           answer.append(avatar, answerTextWrap, answerImgWrap);
 
-          // GSAP 打字動畫
-          // let split = SplitText.create(".init-text", {
-          //   type: "chars",
-          // });
-
+          // 打字動畫
           gsap.to(answerTextWrap[0], {
             duration: 3,
             text: {
@@ -82,5 +77,23 @@ $(document).ready(function () {
         }, 1000);
       }, 500);
     }
+  });
+
+  let headerHeight = $("header").height();
+  $(".chat").on("scroll", function () {
+    $(".answer").each(function (i) {
+      console.log("i=" + i);
+      let avatarHeight = $(this).find(".answer_logo").height();
+      let triggerOffset = (headerHeight - avatarHeight) / 2;
+      let answerTop = $(this).offset().top;
+      let answerBottom = $(this).offset().top + $(this).height() + 70;
+      if (answerTop <= triggerOffset && answerBottom >= headerHeight) {
+        $(this).find(".answer_logo").addClass("fixed");
+        $(this).find(".answer_logo").css("top",triggerOffset);
+      } else {
+        $(this).find(".answer_logo").removeClass("fixed");
+        $(this).find(".answer_logo").css("top", 0);
+      }
+    });
   });
 });

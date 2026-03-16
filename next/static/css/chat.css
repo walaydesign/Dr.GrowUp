@@ -68,6 +68,8 @@ header::after {
   visibility: hidden;
   -webkit-transform: translateX(-100px);
           transform: translateX(-100px);
+  position: relative;
+  padding-top: 70px;
 }
 
 .chat .answer.show {
@@ -86,6 +88,9 @@ header::after {
       -ms-flex-align: center;
           align-items: center;
   gap: 14px;
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 
 .chat .answer_logo img {
@@ -95,6 +100,18 @@ header::after {
 .chat .answer_logo p {
   color: #626262;
   font-size: 17px;
+}
+
+.chat .answer_logo.fixed {
+  max-width: 740px;
+  width: 100%;
+  padding-left: 10px;
+  padding-right: 10px;
+  position: fixed;
+  left: 50%;
+  top: 0;
+  -webkit-transform: translateX(-50%);
+          transform: translateX(-50%);
 }
 
 .chat .answer_text {
@@ -244,26 +261,29 @@ header::after {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  -webkit-box-align: end;
+      -ms-flex-align: end;
+          align-items: flex-end;
   -webkit-box-shadow: 0 0 10px rgba(0, 0, 0, 0.06);
           box-shadow: 0 0 10px rgba(0, 0, 0, 0.06);
 }
 
 .chat_input_wrapper {
   width: calc(100% - 46px);
-  padding: 10px 16px;
+  padding: 10px 16px 0 0;
+  min-height: 46px;
+  height: auto;
 }
 
 .chat_input textarea {
-  font-size: 18px;
-  height: 46px;
+  height: 100%;
   width: 100%;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
   resize: none;
-  max-height: calc(46px * 4);
+  line-height: 1.8;
+  max-height: calc(1.8em * 4);
+  padding: 0;
 }
 
 .chat_input textarea::-webkit-input-placeholder {
@@ -327,6 +347,11 @@ header::after {
   .chat .answer_logo p {
     font-size: 16px;
   }
+  .chat .answer_logo.fixed {
+    max-width: 680px;
+    padding-left: 8px;
+    padding-right: 8px;
+  }
   .chat .answer_text {
     padding: 14px 16px;
   }
@@ -352,10 +377,11 @@ header::after {
     padding: 10px 16px;
     margin-bottom: 12px;
   }
-  .chat_input textarea {
+  .chat_input_wrapper {
     width: calc(100% - 40px);
+  }
+  .chat_input textarea {
     font-size: 15px;
-    height: 40px;
   }
   .chat_input_send {
     width: 40px;
@@ -409,6 +435,10 @@ header::after {
     margin-top: 22px;
     max-width: inherit;
   }
+  .chat .answer_logo.fixed {
+    padding-left: 11px;
+    padding-right: 11px;
+  }
   .chat_inner {
     padding-left: 6px;
     padding-right: 6px;
@@ -433,6 +463,9 @@ header::after {
   }
   .chat_wrapper.init h1 {
     font-size: 22px;
+  }
+  .chat_input textarea {
+    max-height: calc(1.8em * 6);
   }
 }
 
