@@ -13,6 +13,7 @@ header {
   position: fixed;
   top: 0;
   left: 0;
+  z-index: 1;
 }
 
 header::after {
@@ -112,6 +113,7 @@ header::after {
   top: 0;
   -webkit-transform: translateX(-50%);
           transform: translateX(-50%);
+  z-index: 2;
 }
 
 .chat .answer_text {

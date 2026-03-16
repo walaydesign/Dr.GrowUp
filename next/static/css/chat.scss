@@ -19,6 +19,7 @@ header {
   position: fixed;
   top: 0;
   left: 0;
+  z-index: 1;
   &::after {
     position: absolute;
     width: 100%;
@@ -96,6 +97,7 @@ header {
         left: 50%;
         top: 0;
         transform: translateX(-50%);
+        z-index: 2;
       }
     }
     &_text {

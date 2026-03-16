@@ -15,84 +15,136 @@ window.addEventListener("load", () => {
   });
 });
 
-$(document).ready(function () {
-  $(".chat_input_send").click(function () {
-    if ($(".chat-input-main").val() !== "") {
-      //   初始畫面 -> 開始聊天
-      if ($(".chat_wrapper.init").hasClass("active")) {
-        $(".chat_wrapper.init").fadeOut(300);
-        $(".chat_wrapper.chatting").delay(300).show().css("display", "flex");
+document.addEventListener("DOMContentLoaded", () => {
+  const chatInput = document.querySelector(".chat-input-main");
+  const sendBtn = document.querySelector(".chat_input_send");
+  const chatContainer = document.querySelector(".chat");
+  const chatWrapperChatting = document.querySelector(".chat_wrapper.chatting");
+  const chatWrapperInit = document.querySelector(".chat_wrapper.init");
+  const header = document.querySelector("header");
+
+  sendBtn.addEventListener("click", () => {
+    const questionText = chatInput.value.trim();
+
+    if (questionText !== "") {
+      // 初始畫面 -> 開始聊天
+      if (chatWrapperInit && chatWrapperInit.classList.contains("active")) {
+        chatWrapperInit.style.transition = "opacity 0.3s";
+        chatWrapperInit.style.opacity = "0";
+        setTimeout(() => {
+          chatWrapperInit.style.display = "none";
+          chatWrapperChatting.style.display = "flex";
+          chatWrapperChatting.style.opacity = "1";
+        }, 300);
       }
 
-      //   送出問題
-      let questionText = $(".chat-input-main").val();
-      let question = $("<p class='question'></p>").text(questionText);
-      $(".chat_wrapper.chatting").append(question);
+      // 送出問題
+      const question = document.createElement("p");
+      question.className = "question";
+      question.textContent = questionText;
+      chatWrapperChatting.appendChild(question);
 
-      //   思考中
-      let typing = `<div class='typing'><div class='dot dot-1'></div><div class='dot dot-2'></div><div class='dot dot-3'></div></div>`;
-      let typingAnswer = $("<div class='answer_text'></div>").html(typing);
-      let avatar = $(
-        "<div class='answer_logo'><img src='./next/logo.png' /><p>剛剛好 AI</p></div>",
-      );
-      let answer = $("<div class='answer'></div>");
-      answer.append(avatar, typingAnswer);
-      $(".chat_wrapper.chatting").append(answer);
+      // 思考中
+      const typingHTML = `<div class='typing'><div class='dot dot-1'></div><div class='dot dot-2'></div><div class='dot dot-3'></div></div>`;
+      const answer = document.createElement("div");
+      answer.className = "answer";
 
-      //   問題出現的動畫
+      const avatar = document.createElement("div");
+      avatar.className = "answer_logo";
+      avatar.innerHTML = `<img src='./next/logo.png' /><p>剛剛好 AI</p>`;
+
+      const typingAnswer = document.createElement("div");
+      typingAnswer.className = "answer_text";
+      typingAnswer.innerHTML = typingHTML;
+
+      answer.appendChild(avatar);
+      answer.appendChild(typingAnswer);
+      chatWrapperChatting.appendChild(answer);
+
+      // 問題出現的動畫
+      setTimeout(() => question.classList.add("show"), 350);
+      chatInput.value = "";
+
+      // 問問題後滾動到底部
       setTimeout(() => {
-        question.addClass("show");
+        chatContainer.scrollTo({
+          top: chatContainer.scrollHeight,
+          behavior: "smooth",
+        });
       }, 100);
-      $(".chat-input-main").val("");
-      let chatHeight = $(".chat_wrapper.chatting").height();
-      $(".chat").animate({ scrollTop: chatHeight }, 300);
 
-      //   思考回答出現的動畫
+      // 機器人回答邏輯
       setTimeout(() => {
-        answer.addClass("show");
-        //   回答
+        answer.classList.add("show");
+
         setTimeout(() => {
-          let answerText = `如果你對孩子的身高、骨齡或發育還想更系統地了解，其實黃醫師有把很多門診常被問到的問題整理成一本書。<br><br>裡面把身高、骨齡、發育指標等觀念講得很清楚，也整理了很多爸媽常見的疑問。<br><br>有興趣可以看看：<a href="#">https://www.drgrowup.com.tw/blog/shop</a><br>我可以怎麼瞭解更多資訊`;
-          let answerTextWrap = $("<p class='answer_text'></p>");
+          const answerText = `如果你對孩子的身高、骨齡或發育還想更系統地了解，其實黃醫師有把很多門診常被問到的問題整理成一本書。<br><br>裡面把身高、骨齡、發育指標等觀念講得很清楚，也整理了很多爸媽常見的疑問。<br><br>有興趣可以看看：<a href="#">https://www.drgrowup.com.tw/blog/shop</a><br>我可以怎麼瞭解更多資訊`;
 
-          let answerImgUrl = "./next/pic.jpg";
-          let answerImg = $("<img>").attr("src", answerImgUrl);
-          let answerImgWrap = $("<div class='answer_pic'></div>");
-          answerImgWrap.append(answerImg);
-          answer.empty();
-          answer.append(avatar, answerTextWrap, answerImgWrap);
-          $(".chat_wrapper.chatting").append(answer);
+          const answerTextWrap = document.createElement("p");
+          answerTextWrap.className = "answer_text";
 
-          answer.append(avatar, answerTextWrap, answerImgWrap);
+          const answerImgWrap = document.createElement("div");
+          answerImgWrap.className = "answer_pic";
+          answerImgWrap.innerHTML = `<img src='./next/pic.jpg' />`;
 
-          // 打字動畫
-          gsap.to(answerTextWrap[0], {
+          // 清空原有的 typing 內容並更換
+          answer.innerHTML = "";
+          answer.appendChild(avatar);
+          answer.appendChild(answerTextWrap);
+          answer.appendChild(answerImgWrap);
+
+          // GSAP 打字動畫
+          gsap.to(answerTextWrap, {
             duration: 3,
-            text: {
-              value: answerText,
-              delimiter: "",
-            },
+            text: { value: answerText, delimiter: "" },
             ease: "none",
+            onUpdate: () => {
+              // 打字時跟隨滾動
+              //   chatContainer.scrollTop = chatContainer.scrollHeight;
+            },
           });
         }, 1000);
       }, 500);
     }
   });
 
-  let headerHeight = $("header").height();
-  $(".chat").on("scroll", function () {
-    $(".answer").each(function (i) {
-      console.log("i=" + i);
-      let avatarHeight = $(this).find(".answer_logo").height();
-      let triggerOffset = (headerHeight - avatarHeight) / 2;
-      let answerTop = $(this).offset().top;
-      let answerBottom = $(this).offset().top + $(this).height() + 70;
-      if (answerTop <= triggerOffset && answerBottom >= headerHeight) {
-        $(this).find(".answer_logo").addClass("fixed");
-        $(this).find(".answer_logo").css("top",triggerOffset);
+  // Scroll 監聽 (Sticky Avatar 邏輯)
+  chatContainer.addEventListener("scroll", () => {
+    const headerHeight = header ? header.offsetHeight : 0;
+    const answers = document.querySelectorAll(".answer");
+
+    answers.forEach((item) => {
+      const avatar = item.querySelector(".answer_logo");
+      if (!avatar) return;
+
+      const avatarHeight = avatar.offsetHeight;
+      let triggerOffset;
+      if (window.innerWidth <= 450) {
+        triggerOffset = headerHeight;
       } else {
-        $(this).find(".answer_logo").removeClass("fixed");
-        $(this).find(".answer_logo").css("top", 0);
+        triggerOffset = (headerHeight - avatarHeight) / 2;
+      }
+
+      // 隨滾動變化的值
+      const rect = item.getBoundingClientRect();
+      const chatRect = chatContainer.getBoundingClientRect();
+
+      // 相對於容器頂部的距離
+      const answerTop = rect.top - chatRect.top;
+      const answerBottom = answerTop + item.offsetHeight + 70;
+      let avatarTop;
+      if (window.innerWidth <= 450) {
+        avatarTop = headerHeight;
+      } else {
+        avatarTop = triggerOffset;
+      }
+
+      if (answerTop <= triggerOffset && answerBottom >= headerHeight) {
+        avatar.classList.add("fixed");
+        avatar.style.top = `${avatarTop}px`;
+      } else {
+        avatar.classList.remove("fixed");
+        avatar.style.top = `0px`;
       }
     });
   });
