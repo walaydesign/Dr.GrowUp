@@ -188,12 +188,14 @@ header::after {
 
 .chat_wrapper.init p {
   margin: 0;
-  font-size: 14px;
+  font-size: 16px;
   line-height: 2;
+  letter-spacing: 0.08em;
 }
 
 .chat_wrapper.init p .remind {
   color: #3c98ff;
+  font-size: 14px;
 }
 
 .chat_wrapper.chatting {
@@ -249,16 +251,19 @@ header::after {
           box-shadow: 0 0 10px rgba(0, 0, 0, 0.06);
 }
 
-.chat_input textarea {
+.chat_input_wrapper {
   width: calc(100% - 46px);
-  padding-right: 16px;
+  padding: 10px 16px;
+}
+
+.chat_input textarea {
   font-size: 18px;
   height: 46px;
-  padding: 10px 16px 10px 0;
+  width: 100%;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
-  overflow: hidden;
   resize: none;
+  max-height: calc(46px * 4);
 }
 
 .chat_input textarea::-webkit-input-placeholder {
@@ -275,6 +280,11 @@ header::after {
 
 .chat_input textarea::placeholder {
   color: #9c9c9c;
+}
+
+.chat_input textarea.scrollable {
+  overflow-y: auto;
+  height: auto;
 }
 
 .chat_input_send {
@@ -373,6 +383,9 @@ header::after {
     font-size: 24px;
   }
   .chat_wrapper.init p {
+    font-size: 15px;
+  }
+  .chat_wrapper.init p .remind {
     font-size: 13px;
   }
 }

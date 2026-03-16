@@ -143,10 +143,12 @@ header {
       }
       p {
         margin: 0;
-        font-size: 14px;
+        font-size: 16px;
         line-height: 2;
+        letter-spacing: 0.08em;
         .remind {
           color: $blue-2;
+          font-size: 14px;
         }
       }
     }
@@ -188,17 +190,23 @@ header {
     display: flex;
     align-items: center;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.06);
-    textarea {
+    &_wrapper {
       width: calc(100% - 46px);
-      padding-right: 16px;
+      padding: 10px 16px;
+    }
+    textarea {
       font-size: 18px;
       height: 46px;
-      padding: 10px 16px 10px 0;
+      width: 100%;
       box-sizing: border-box;
-      overflow: hidden;
       resize: none;
+      max-height: calc(46px * 4);
       &::placeholder {
         color: $gray-4;
+      }
+      &.scrollable {
+        overflow-y: auto;
+        height: auto;
       }
     }
     &_send {
@@ -243,8 +251,6 @@ header {
       }
     }
     &_inner {
-      // padding-bottom: 30px;
-      // height: calc(100% - 126px);
       padding-left: 8px;
       padding-right: 8px;
       max-width: 680px;
@@ -291,10 +297,11 @@ header {
           font-size: 24px;
         }
         p {
-          font-size: 13px;
+          font-size: 15px;
+          .remind {
+            font-size: 13px;
+          }
         }
-      }
-      &.chatting {
       }
     }
   }
