@@ -50,11 +50,11 @@ $(document).ready(function () {
         answer.addClass("show");
         setTimeout(() => {
           //   回答
-          // let answerText = `如果你對孩子的身高、骨齡或發育還想更系統地了解，其實黃醫師有把很多門診常被問到的問題整理成一本書。<br><br>裡面把身高、骨齡、發育指標等觀念講得很清楚，也整理了很多爸媽常見的疑問。<br><br>有興趣可以看看：<a href="#">https://www.drgrowup.com.tw/blog/shop</a><br>我可以怎麼瞭解更多資訊`;
+          let answerText = `如果你對孩子的身高、骨齡或發育還想更系統地了解，其實黃醫師有把很多門診常被問到的問題整理成一本書。<br><br>裡面把身高、骨齡、發育指標等觀念講得很清楚，也整理了很多爸媽常見的疑問。<br><br>有興趣可以看看：<a href="#">https://www.drgrowup.com.tw/blog/shop</a><br>我可以怎麼瞭解更多資訊`;
           // let answerTextWrap = $("<p class='answer_text'></p>").html(
           //   answerText,
           // );
-            let answerTextWrap = $("<p class='answer_text'>地今杯穴己上亭古發紅太間勿青、造且美實在裏生教。都六品條，水壯具放牠田王真兆怪路四現，法打男抓能拍！別各午在步課花又力！再手亮化冰貝吧。貓犬彩。尺彩現三們貓尾喝爸就點坐地洋何口爬急東免「起收共躲飽」動鳥圓定是穴鳥乞走上紅「是這她者他綠牙多中連」忍兩。音泉帽士衣蛋點相去正？犬們小走！長定爬真畫太姐見實石又現工巴寸頭比，寸對乙申學後抱林苦至樹教尺同，追乙現我結笑干雲他。種世化司日眼祖請邊知松長完麻斤多七草車就，耍交借爸實明門找半「皮千跑公兆服」。</p>");
+            let answerTextWrap = $("<p class='answer_text'></p>");
 
           let answerImgUrl = "./next/pic.jpg";
           let answerImg = $("<img>").attr("src", answerImgUrl);
@@ -67,6 +67,10 @@ $(document).ready(function () {
           answer.append(avatar, answerTextWrap, answerImgWrap);
 
           // GSAP 打字動畫
+          // let split = SplitText.create(".init-text", {
+          //   type: "chars",
+          // });
+
           gsap.to(answerTextWrap[0], {
             duration: 3,
             text: {
