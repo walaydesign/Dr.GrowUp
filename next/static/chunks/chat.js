@@ -109,43 +109,41 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // Scroll 監聽 (Sticky Avatar 邏輯)
-  chatContainer.addEventListener("scroll", () => {
-    const headerHeight = header ? header.offsetHeight : 0;
-    const answers = document.querySelectorAll(".answer");
+  // chatContainer.addEventListener("scroll", () => {
+  //   const headerHeight = header ? header.offsetHeight : 0;
+  //   const answers = document.querySelectorAll(".answer");
 
-    answers.forEach((item) => {
-      const avatar = item.querySelector(".answer_logo");
-      if (!avatar) return;
+  //   answers.forEach((item) => {
+  //     const avatar = item.querySelector(".answer_logo");
+  //     if (!avatar) return;
 
-      const avatarHeight = avatar.offsetHeight;
-      let triggerOffset;
-      if (window.innerWidth <= 450) {
-        triggerOffset = headerHeight;
-      } else {
-        triggerOffset = (headerHeight - avatarHeight) / 2;
-      }
+  //     const avatarHeight = avatar.offsetHeight;
+  //     let triggerOffset;
+  //     if (window.innerWidth <= 450) {
+  //       triggerOffset = headerHeight;
+  //     } else {
+  //       triggerOffset = (headerHeight - avatarHeight) / 2;
+  //     }
 
-      // 隨滾動變化的值
-      const rect = item.getBoundingClientRect();
-      const chatRect = chatContainer.getBoundingClientRect();
+  //     const rect = item.getBoundingClientRect();
+  //     const chatRect = chatContainer.getBoundingClientRect();
 
-      // 相對於容器頂部的距離
-      const answerTop = rect.top - chatRect.top;
-      const answerBottom = answerTop + item.offsetHeight + 70;
-      let avatarTop;
-      if (window.innerWidth <= 450) {
-        avatarTop = headerHeight;
-      } else {
-        avatarTop = triggerOffset;
-      }
+  //     const answerTop = rect.top - chatRect.top;
+  //     const answerBottom = answerTop + item.offsetHeight + 70;
+  //     let avatarTop;
+  //     if (window.innerWidth <= 450) {
+  //       avatarTop = headerHeight;
+  //     } else {
+  //       avatarTop = triggerOffset;
+  //     }
 
-      if (answerTop <= triggerOffset && answerBottom >= headerHeight) {
-        avatar.classList.add("fixed");
-        avatar.style.top = `${avatarTop}px`;
-      } else {
-        avatar.classList.remove("fixed");
-        avatar.style.top = `0px`;
-      }
-    });
-  });
+  //     if (answerTop <= triggerOffset && answerBottom >= headerHeight) {
+  //       avatar.classList.add("fixed");
+  //       avatar.style.top = `${avatarTop}px`;
+  //     } else {
+  //       avatar.classList.remove("fixed");
+  //       avatar.style.top = `0px`;
+  //     }
+  //   });
+  // });
 });
