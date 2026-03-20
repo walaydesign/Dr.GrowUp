@@ -2,16 +2,13 @@ window.addEventListener("load", () => {
   gsap.registerPlugin(TextPlugin, SplitText);
   //   初始頁面動畫
   let split = SplitText.create(".init-text", {
-    type: "lines",
-    linesClass: "line",
+    type: "chars, words, lines",
   });
 
-  gsap.from(split.lines, {
-    yPercent: 100,
+  gsap.from(split.chars, {
     opacity: 0,
-    duration: 1,
-    stagger: 0.2,
-    ease: "power2.out",
+    duration: 0.05,
+    stagger: 0.03,
   });
 });
 
@@ -23,7 +20,32 @@ document.addEventListener("DOMContentLoaded", () => {
   const chatWrapperInit = document.querySelector(".chat_wrapper.init");
   const header = document.querySelector("header");
 
-  sendBtn.addEventListener("click", () => {
+  sendBtn.addEventListener("click", () => {sendMessage();});
+
+  // 按enter送出訊息
+  const textarea = document.querySelector(".chat-input-main");
+  textarea.addEventListener("keydown", function (e) {
+    // 1. 檢查是否正在使用中文輸入法選字 (避免選字時按 Enter 直接送出)
+    // if (e.isComposing || e.keyCode === 229) {
+    //   return;
+    // }
+
+    // 2. 判斷按下的是否為 Enter
+    if (e.key === "Enter") {
+      // 3. 判斷是否有按住 Shift 鍵
+      if (e.shiftKey) {
+        // 如果按住 Shift + Enter：允許換行 (不需做任何事，讓預設行為發生)
+        return;
+      } else {
+        // 如果只按 Enter：送出訊息
+        e.preventDefault(); // *** 關鍵：阻止 textarea 產生換行 ***
+
+        sendMessage(); // 執行你的送出 function
+      }
+    }
+  });
+
+  function sendMessage() {
     const questionText = chatInput.value.trim();
 
     if (questionText !== "") {
@@ -78,7 +100,7 @@ document.addEventListener("DOMContentLoaded", () => {
         answer.classList.add("show");
 
         setTimeout(() => {
-          const answerText = `如果你對孩子的身高、骨齡或發育還想更系統地了解，其實黃醫師有把很多門診常被問到的問題整理成一本書。<br><br>裡面把身高、骨齡、發育指標等觀念講得很清楚，也整理了很多爸媽常見的疑問。<br><br>有興趣可以看看：<a href="#">https://www.drgrowup.com.tw/blog/shop</a><br>我可以怎麼瞭解更多資訊`;
+          const answerText = `如果你對孩子的身高、骨齡或發育還想更系統地了解，其實黃醫師有把很多門診常被問到的問題整理成一本書。<br><br>裡面把身高、骨齡、發育指標等觀念講得很清楚，也整理了很多爸媽常見的疑問。<br><br>有興趣可以看看：<a href="https://www.drgrowup.com.tw/blog/shop" target="_blank">https://www.drgrowup.com.tw/blog/shop</a><br>我可以怎麼瞭解更多資訊`;
 
           const answerTextWrap = document.createElement("p");
           answerTextWrap.className = "answer_text";
@@ -99,14 +121,48 @@ document.addEventListener("DOMContentLoaded", () => {
             text: { value: answerText, delimiter: "" },
             ease: "none",
             onUpdate: () => {
-              // 打字時跟隨滾動
-              //   chatContainer.scrollTop = chatContainer.scrollHeight;
+            // 打字時跟隨滾動
+            chatContainer.scrollTop = chatContainer.scrollHeight;
+            },
+            onComplete: () => {
+              // 顯示圖片的動畫
+              answerImgWrap.style.display = "block";
+              gsap.to(answerImgWrap, {
+                opacity: 1,
+                duration: 0.5,
+                onComplete: () => {
+                  // 取得各個元素的高度
+                  const chatBottom = document.querySelector(".chat_bottom");
+                  const chatWrapperChatting = document.querySelector(
+                    ".chat_wrapper.chatting",
+                  );
+
+                  // 使用 offsetHeight 取得目前可視的高度 (含 padding/border)
+                  const inputHeight = chatBottom ? chatBottom.offsetHeight : 0;
+                  const answerHeight = answer.offsetHeight;
+                  const imgHeight = answerImgWrap.offsetHeight;
+
+                  // 取得整個對話容器的內容總高度
+                  const wrapperHeight = chatWrapperChatting.scrollHeight;
+
+                  // 計算滾動終點
+                  // 總內容高度 - 視窗高度 + 圖片一半的高度
+                  const scrollEnd =
+                    wrapperHeight - window.innerHeight - imgHeight / 2;
+
+                  // 執行平滑捲動
+                  chatContainer.scrollTo({
+                    top: scrollEnd,
+                    behavior: "smooth",
+                  });
+                }
+              });
             },
           });
         }, 1000);
       }, 500);
     }
-  });
+  }
 
   // Scroll 監聽 (Sticky Avatar 邏輯)
   // chatContainer.addEventListener("scroll", () => {

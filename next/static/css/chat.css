@@ -16,16 +16,18 @@ header {
   z-index: 1;
 }
 
-header::after {
-  position: absolute;
-  width: 100%;
-  height: 118px;
-  content: "";
-  background: -webkit-gradient(linear, left top, left bottom, from(#fcfcfc), to(transparent));
-  background: linear-gradient(to bottom, #fcfcfc 0%, transparent 100%);
-  top: 0;
-  left: 0;
-  z-index: -1;
+@media screen and (max-width: 1024px) {
+  header::after {
+    position: absolute;
+    width: 100%;
+    height: 118px;
+    content: "";
+    background: -webkit-gradient(linear, left top, left bottom, from(#fcfcfc), to(transparent));
+    background: linear-gradient(to bottom, #fcfcfc 0%, transparent 100%);
+    top: 0;
+    left: 0;
+    z-index: -1;
+  }
 }
 
 .chat {
@@ -49,8 +51,13 @@ header::after {
   -webkit-transition: 0.3s;
   transition: 0.3s;
   visibility: hidden;
-  -webkit-transform: translateX(100px);
-          transform: translateX(100px);
+  -webkit-transform: translateY(150px);
+          transform: translateY(150px);
+  max-width: calc(100% - 106px);
+}
+
+.chat .question:not(:nth-of-type(1)) {
+  margin-top: 30px;
 }
 
 .chat .question.show {
@@ -67,8 +74,8 @@ header::after {
   -webkit-transition: 0.3s;
   transition: 0.3s;
   visibility: hidden;
-  -webkit-transform: translateX(-100px);
-          transform: translateX(-100px);
+  -webkit-transform: translateY(150px);
+          transform: translateY(150px);
   position: relative;
   padding-top: 70px;
 }
@@ -117,7 +124,7 @@ header::after {
 }
 
 .chat .answer_text {
-  border: 1px solid #e3e3e3;
+  border: 1.5px solid #e3e3e3;
   border-radius: 20px;
   background-color: #fff;
   padding: 16px 20px;
@@ -137,12 +144,24 @@ header::after {
           flex-direction: column;
 }
 
+.chat .answer_text a {
+  color: #3c98ff;
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+}
+
+.chat .answer_text a:hover {
+  color: #74beff;
+}
+
 .chat .answer_pic {
   padding: 0 20px;
   margin-top: 30px;
   max-width: 460px;
   width: 100%;
   margin-top: 30px;
+  opacity: 0;
+  display: none;
 }
 
 .chat .answer_pic img {
@@ -187,7 +206,7 @@ header::after {
       -ms-flex-align: center;
           align-items: center;
   gap: 30px;
-  max-width: 550px;
+  max-width: 570px;
   width: 100%;
   margin: 0 auto;
   height: 100%;
@@ -209,12 +228,21 @@ header::after {
   margin: 0;
   font-size: 16px;
   line-height: 2;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.08em !important;
 }
 
 .chat_wrapper.init p .remind {
   color: #3c98ff;
   font-size: 14px;
+  display: inline-block !important;
+}
+
+.chat_wrapper.init p.init-text-has-remind > div > div {
+  display: inline !important;
+}
+
+.chat_wrapper.init p > div {
+  display: inline !important;
 }
 
 .chat_wrapper.chatting {
@@ -324,10 +352,18 @@ header::after {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
 }
 
 .chat_input_send > img {
   width: 54%;
+  -webkit-transform: translateX(8%);
+          transform: translateX(8%);
+}
+
+.chat_input_send:hover {
+  background-color: #74beff;
 }
 
 @media screen and (max-width: 1024px) {
@@ -335,6 +371,7 @@ header::after {
     padding: 14px 16px;
     border-radius: 20px;
     margin-bottom: 30px;
+    max-width: calc(100% - 94px);
   }
   .chat .answer {
     padding-right: 94px;
@@ -381,6 +418,8 @@ header::after {
   }
   .chat_input_wrapper {
     width: calc(100% - 40px);
+    min-height: 40px;
+    padding-top: 6.5px;
   }
   .chat_input textarea {
     font-size: 15px;
@@ -436,6 +475,7 @@ header::after {
   .chat .answer_pic {
     margin-top: 22px;
     max-width: inherit;
+    padding: 0 9px;
   }
   .chat .answer_logo.fixed {
     padding-left: 11px;
