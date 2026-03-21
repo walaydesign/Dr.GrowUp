@@ -222,6 +222,7 @@ header {
   font-size: 26px;
   font-weight: 500;
   margin: 0;
+  line-height: 1.6;
 }
 
 .chat_wrapper.init p {
@@ -419,10 +420,11 @@ header {
   .chat_input_wrapper {
     width: calc(100% - 40px);
     min-height: 40px;
-    padding-top: 6.5px;
+    padding-top: 4.8px;
   }
-  .chat_input textarea {
-    font-size: 15px;
+  .chat_input_wrapper textarea {
+    -webkit-transform: translateY(1.5px);
+            transform: translateY(1.5px);
   }
   .chat_input_send {
     width: 40px;
@@ -464,6 +466,7 @@ header {
   }
   .chat .question {
     font-size: 15px;
+    max-width: calc(100% - 32px);
   }
   .chat .answer {
     padding-right: 0;

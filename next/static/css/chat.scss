@@ -172,6 +172,7 @@ header {
         font-size: 26px;
         font-weight: 500;
         margin: 0;
+        line-height: 1.6;
       }
       p {
         margin: 0;
@@ -328,10 +329,14 @@ header {
       &_wrapper {
         width: calc(100% - 40px);
         min-height: 40px;
-        padding-top: 6.5px;
+        // padding-top: 6.5px;
+        padding-top: 4.8px;
+        textarea {
+          transform: translateY(1.5px);
+        }
       }
       textarea {
-        font-size: 15px;
+        // font-size: 15px;
       }
       &_send {
         width: 40px;
@@ -369,6 +374,7 @@ header {
     padding-right: 5px;
     .question {
       font-size: 15px;
+      max-width: calc(100% - 32px);
     }
     .answer {
       padding-right: 0;

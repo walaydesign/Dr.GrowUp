@@ -20,19 +20,16 @@ document.addEventListener("DOMContentLoaded", () => {
   const chatWrapperInit = document.querySelector(".chat_wrapper.init");
   const header = document.querySelector("header");
 
-  sendBtn.addEventListener("click", () => {sendMessage();});
+  sendBtn.addEventListener("click", () => {
+    sendMessage();
+  });
 
   // 按enter送出訊息
   const textarea = document.querySelector(".chat-input-main");
   textarea.addEventListener("keydown", function (e) {
-    // 1. 檢查是否正在使用中文輸入法選字 (避免選字時按 Enter 直接送出)
-    // if (e.isComposing || e.keyCode === 229) {
-    //   return;
-    // }
-
-    // 2. 判斷按下的是否為 Enter
+    // 判斷按下的是否為 Enter
     if (e.key === "Enter") {
-      // 3. 判斷是否有按住 Shift 鍵
+      // 判斷是否有按住 Shift 鍵
       if (e.shiftKey) {
         // 如果按住 Shift + Enter：允許換行 (不需做任何事，讓預設行為發生)
         return;
@@ -40,7 +37,7 @@ document.addEventListener("DOMContentLoaded", () => {
         // 如果只按 Enter：送出訊息
         e.preventDefault(); // *** 關鍵：阻止 textarea 產生換行 ***
 
-        sendMessage(); // 執行你的送出 function
+        sendMessage();
       }
     }
   });
@@ -83,6 +80,10 @@ document.addEventListener("DOMContentLoaded", () => {
       answer.appendChild(typingAnswer);
       chatWrapperChatting.appendChild(answer);
 
+      // 輸入框高度恢復
+      const textarea = document.querySelector(".chat-input-main");
+      textarea.style.height = "auto";
+
       // 問題出現的動畫
       setTimeout(() => question.classList.add("show"), 350);
       chatInput.value = "";
@@ -121,8 +122,8 @@ document.addEventListener("DOMContentLoaded", () => {
             text: { value: answerText, delimiter: "" },
             ease: "none",
             onUpdate: () => {
-            // 打字時跟隨滾動
-            chatContainer.scrollTop = chatContainer.scrollHeight;
+              // 打字時跟隨滾動
+              chatContainer.scrollTop = chatContainer.scrollHeight;
             },
             onComplete: () => {
               // 顯示圖片的動畫
@@ -155,7 +156,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     top: scrollEnd,
                     behavior: "smooth",
                   });
-                }
+                },
               });
             },
           });
