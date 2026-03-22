@@ -434,12 +434,12 @@
           );
 
           textarea.addEventListener("input", function () {
-            // 1. 重置，讓 scrollHeight 反映真實內容高度
+            // 重置，讓 scrollHeight 反映真實內容高度
             this.style.height = "auto";
-            // 2. 獲取當前內容高度
+            // 獲取當前內容高度
             let currentScrollHeight = this.scrollHeight;
 
-            // 3. 邏輯判斷
+            
             if (currentScrollHeight <= baseHeight) {
               // console.log("如果內容高度小於或等於初始高度 -> 回到第一行狀態");
               this.style.height = baseHeight + "px";
